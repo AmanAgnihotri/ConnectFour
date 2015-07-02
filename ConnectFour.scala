@@ -2,7 +2,8 @@ class ConnectFour {
 
   case class Tile(val color: Char)
 
-  object Tile {
+  object Tile
+  {
     final val EMPTY = Tile(' ')
     final val RED = Tile('R')
     final val YELLOW = Tile('Y')
@@ -17,10 +18,11 @@ class ConnectFour {
 
   private var fillerIndex: Array[Int] = Array.fill(COLUMNS)(ROWS-1)
 
-  def startGame: Unit = {
+  def startGame: Unit =
+  {
     var (hasRedWon, hasYellowWon) = (false, false)
 
-    def check(tile: Tile): Boolean = {
+    def check(tile: Tile): Boolean ={
       println(gridToString)
       getAndInsertTile(tile)
       if(checkGrid(tile)) true else false
@@ -43,7 +45,8 @@ class ConnectFour {
 
   def isGridFull: Boolean = fillerIndex.filter(_ < 0).size == COLUMNS
 
-  def checkGrid(tile: Tile): Boolean = {
+  def checkGrid(tile: Tile): Boolean =
+  {
     var (i, j, k, m, counter) = (0, 0, 0, 0, 0)
 
     // Check downward
@@ -97,7 +100,8 @@ class ConnectFour {
     return false;
   }
 
-  def getAndInsertTile(tile: Tile): Unit = {
+  def getAndInsertTile(tile: Tile): Unit =
+  {
     tile match {
       case Tile.RED => println("Enter position to drop the RED tile")
       case Tile.YELLOW => println("Enter position to drop the YELLOW tile")
@@ -112,9 +116,10 @@ class ConnectFour {
     fillerIndex(position) -= 1
   }
 
-  def printGrid: String = println(grid.map(
-    "|" + _.map(_.color).mkString("|") + "|"
-  ).mkString("\n"))
+  def printGrid: String =
+    println(grid.map(
+      "|" + _.map(_.color).mkString("|") + "|"
+    ).mkString("\n"))
 
 }
 
