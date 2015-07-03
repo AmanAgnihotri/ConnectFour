@@ -15,9 +15,16 @@ Use sbt for for project building.
 
 __scalac__ for directly compiling the file might not work. The codebase uses scala 2.11.x which supports scala.read.StdIn I/O API.
 
-1. To start __sbt__ console run `sbt` in terminal
-2. Use the following commands
+1. To start __sbt__ console run `sbt` in terminal. This opens an SBT console
+2. To run the code, use command `run`
+3. Choose between the two java and scala run options
+
+
+`[1] game.java.ConnectFour`
+
+`[2] game.scala.Game`
+
+ Use these other commands also
 
   - `compile`
-  - `run`
   - `test`
