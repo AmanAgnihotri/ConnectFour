@@ -5,32 +5,32 @@ public class ConnectFour
 {
   private final int ROWS = 6, COLUMNS = 7;
   private final int CONSECUTIVE_CONNECTION_REQUIRED = 4;
-  
+
   private enum Type
   {
     Red ('R'), Yellow ('Y');
-    
+
     char character;
-    
+
     private Type (char ch)
     {
       character = ch;
     }
-    
+
     public char getChar ()
     {
       return character;
     }
   }
-  
+
   private char[][] grid;
   private int[] fillerIndex;
-  
+
   public ConnectFour ()
   {
     startGame ();
   }
-  
+
   private void startGame ()
   {
     initializeGrids ();
@@ -38,31 +38,31 @@ public class ConnectFour
 
     boolean hasRedWon = false;
     boolean hasYellowWon = false;
-    
+
     while (true)
     {
       if (isGridFull ())
       {
         break;
       }
-      
+
       getAndPutInput (Type.Red);
       hasRedWon = checkGrid (Type.Red);
-      
+
       if (hasRedWon)
       {
         break;
       }
-      
+
       getAndPutInput (Type.Yellow);
       hasYellowWon = checkGrid (Type.Yellow);
-      
+
       if (hasYellowWon)
       {
         break;
       }
     }
-    
+
     if (hasRedWon)
     {
       System.out.println ("The Red Player Won!");
@@ -76,11 +76,11 @@ public class ConnectFour
       System.out.println ("Game is a Draw!");
     }
   }
-  
+
   private void initializeGrids ()
   {
     grid = new char[ROWS][COLUMNS];
-    
+
     for (int i = 0; i < grid.length; i++)
     {
       for (int j = 0; j < grid[i].length; j++)
@@ -88,11 +88,11 @@ public class ConnectFour
         grid[i][j] = ' ';
       }
     }
-    
+
     fillerIndex = new int[COLUMNS];
     java.util.Arrays.fill (fillerIndex, ROWS - 1);
   }
-  
+
   private void display ()
   {
     System.out.print ("\f");
@@ -107,7 +107,7 @@ public class ConnectFour
       System.out.println ("|");
     }
   }
-  
+
   private boolean isGridFull ()
   {
     for (int i = 0; i < ROWS; i++)
@@ -123,7 +123,7 @@ public class ConnectFour
 
     return true;
   }
-  
+
   public void getAndPutInput (Type type)
   {
     boolean isValidInput = false;
@@ -131,7 +131,7 @@ public class ConnectFour
     do
     {
       System.out.println ("Drop a " + type + " disk at column [0-" + (COLUMNS - 1) + "] : ");
-      
+
       try
       {
         BufferedReader reader = new BufferedReader (new InputStreamReader (System.in));
@@ -145,13 +145,13 @@ public class ConnectFour
       }
     } while (!isValidInput);
   }
-  
+
   private void put (Type type, int index)
   {
     grid[fillerIndex[index]--][index] = type.getChar ();
     display ();
   }
-  
+
   private boolean checkGrid (Type type)
   {
     // Check downward
@@ -168,14 +168,14 @@ public class ConnectFour
             counter++;
           }
         }
-        
+
         if (counter == CONSECUTIVE_CONNECTION_REQUIRED)
         {
           return true;
         }
       }
     }
-    
+
     // Check across
     for (int i = 0; i <= COLUMNS - CONSECUTIVE_CONNECTION_REQUIRED; i++)
     {
@@ -190,14 +190,14 @@ public class ConnectFour
             counter++;
           }
         }
-        
+
         if (counter == CONSECUTIVE_CONNECTION_REQUIRED)
         {
           return true;
         }
       }
     }
-    
+
     // Check left to right diagonally
     for (int i = 0; i <= ROWS - CONSECUTIVE_CONNECTION_REQUIRED; i++)
     {
@@ -212,14 +212,14 @@ public class ConnectFour
             counter++;
           }
         }
-        
+
         if (counter == CONSECUTIVE_CONNECTION_REQUIRED)
         {
           return true;
         }
       }
     }
-    
+
     // Check right to left diagonally
     for (int i = 0; i <= ROWS - CONSECUTIVE_CONNECTION_REQUIRED; i++)
     {
@@ -234,17 +234,17 @@ public class ConnectFour
             counter++;
           }
         }
-        
+
         if (counter == CONSECUTIVE_CONNECTION_REQUIRED)
         {
           return true;
         }
       }
     }
-    
+
     return false;
   }
-  
+
   public static void main (String args[])
   {
     new ConnectFour ();
