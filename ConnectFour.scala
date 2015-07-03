@@ -1,5 +1,7 @@
+package game.scala
+
 class ConnectFour {
-  
+
   case class Tile (val color: Char)
 
   object Tile {
@@ -113,13 +115,16 @@ class ConnectFour {
     fillerIndex (position) -= 1
   }
 
-  def printGrid: String = println (grid.map (
+  def gridToString = println (grid.map (
     "|" + _.map (_.color).mkString ("|") + "|"
   ).mkString ("\n"))
+
 }
 
 object Game {
+
   def main (args: Array[String]): Unit = {
     (new ConnectFour ()).startGame
   }
+
 }
