@@ -44,7 +44,7 @@ class ConnectFour {
     }
   }
 
-  def isGridFull: Boolean = fillerIndex.filter (_ < 0).size == COLUMNS
+  def isGridFull: Boolean = fillerIndex.count (_ < 0) == COLUMNS
 
   def checkGrid (tile: Tile): Boolean = {
     var (i, j, k, m, counter) = (0, 0, 0, 0, 0)
